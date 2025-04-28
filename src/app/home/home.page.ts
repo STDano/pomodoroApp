@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TimeService } from '../services/time.service';
 
 @Component({
   selector: 'app-home',
@@ -7,31 +8,26 @@ import { Component, OnInit } from '@angular/core';
   standalone: false,
 })
 export class HomePage {
+  showButton: boolean = true;
+  
 
-  currentTime: string = '';
-
-  constructor() {}
+  constructor(
+    public time: TimeService
+  ) {}
 
   ngOnInit() {
-    this.updateTime();
     setInterval(() => {
-      this.updateTime();
+      this.time.setTime();
     }, 1000);
+
+    this.time.breakTimerEnded.subscribe(() => {
+      this.showButton = true;
+    });
   }
 
-  updateTime() {
-    const now = new Date();
-    let hours = now.getHours();
-    const minutes = now.getMinutes().toString().padStart(2, '0');
-    const seconds = now.getSeconds().toString().padStart(2, '0');
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours ? hours : 12;
-    const hoursStr = hours.toString().padStart(2, '0');
-    this.currentTime = `${hoursStr}:${minutes}:${seconds} ${ampm}`;
-    console.log(this.currentTime);
+  startPomodoroSession() {
+    this.time.startWorkTimer();
+    this.showButton = false;
   }
-
-  
 
 }
