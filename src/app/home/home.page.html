@@ -1,8 +1,16 @@
-<ion-content class="ion-padding">
-  <h1 class="currentTime">{{ time.currentTime}}</h1>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Pomodoro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding content-center">
+  <div class="time-container">
+    <h1 class="currentTime">{{ time.currentTime}}</h1>
+  </div>
   <h1 class="timer">{{ time.timerDisplay || '00:00' }}</h1>
 
-  <ion-button *ngIf="showButton" (click)="startPomodoroSession()">
+  <ion-button class="pomodoro-button" *ngIf="showButton" (click)="startPomodoroSession()">
     Start Pomodoro Session
   </ion-button>
 </ion-content>

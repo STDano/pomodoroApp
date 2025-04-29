@@ -25,3 +25,31 @@
 #container a {
   text-decoration: none;
 }
+
+.content-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+} 
+
+.time-container {
+  background-color: black;
+  border: 1px solid #90ee90;
+  padding: 10px 20px;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.time-container .currentTime {
+  color: #90ee90;
+  margin: 0;
+}
+
+.pomodoro-button {
+  --background: #ffcccc;
+  --color: #660000;
+  border-radius: 4px;
+}

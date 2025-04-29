@@ -33,7 +33,7 @@ export class TimeService {
 
 
   startWorkTimer() {
-    this.endTime = new Date().getTime() + 25.033333333333335 * 60 * 1000;
+    this.endTime = new Date().getTime() + 25.033333333333335 * 60 * 1000; // normal calculation starts 2 seconds later. added .033333333333335 to fix that
 
     this.intervalId = setInterval(() => {
       const now = new Date().getTime();
@@ -50,7 +50,7 @@ export class TimeService {
   }
 
   startBreakTimer() {
-    this.endTime = new Date().getTime() + 5.033333333333335 * 60 * 1000;
+    this.endTime = new Date().getTime() + 5.033333333333335 * 60 * 1000; // i did the same for the break timer
 
     this.intervalId = setInterval(() => {
       const now = new Date().getTime();

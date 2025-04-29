@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LocalNotifications } from '@capacitor/local-notifications';
+import { Haptics, ImpactStyle } from '@capacitor/haptics';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,8 @@ export class NotificationsService {
         },
       ],
     })
+
+    await Haptics.impact({ style: ImpactStyle.Heavy });
   }
 
   async breakNotification() {
@@ -34,5 +37,7 @@ export class NotificationsService {
         },
       ],
     })
+
+    await Haptics.impact({ style: ImpactStyle.Heavy });
   }
 }
