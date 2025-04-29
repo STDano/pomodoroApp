@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LocalNotifications } from '@capacitor/local-notifications';
-import { Haptics, ImpactStyle } from '@capacitor/haptics';
+import { Haptics } from '@capacitor/haptics';
 
 @Injectable({
   providedIn: 'root'
@@ -10,34 +10,35 @@ export class NotificationsService {
   constructor() { }
 
   async workNotification() {
+
     await LocalNotifications.schedule({
       notifications: [
         {
           title: "Work time completed!",
           body: "Break time starting now",
           id: 1,
-          schedule: { at: new Date(Date.now() + 1000) },
-          sound: "workalarm.mp3",
+          channelId: "break-channel",
+          sound: "workalarm",
         },
-      ],
-    })
+       ],
+    });
 
-    await Haptics.impact({ style: ImpactStyle.Heavy });
+    await Haptics.vibrate({ duration: 3000 });
   }
 
   async breakNotification() {
-    await LocalNotifications.schedule({
-      notifications: [
-        {
-          title: "Break time completed!",
-          body: "Pomodoro Session has concluded",
-          id: 1,
-          schedule: { at: new Date(Date.now() + 1000) },
-          sound: "breakalarm.mp3",
-        },
-      ],
-    })
+      await LocalNotifications.schedule({
+        notifications: [
+          {
+            title: "Break time completed!",
+            body: "Pomodoro Session has concluded",
+            id: 2,
+            channelId: "break-channel",
+            sound: "breakalarm",
+          },
+        ],
+      });
 
-    await Haptics.impact({ style: ImpactStyle.Heavy });
+      await Haptics.vibrate({ duration: 3000 });
   }
 }
