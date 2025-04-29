@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { NotificationsService } from './notifications.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class TimeService {
   breakTimerEnded = new Subject<void>();
 
   constructor(
+    private notifications: NotificationsService,
   ) { }
 
   setTime() {
@@ -41,6 +43,7 @@ export class TimeService {
         this.updateTimer(Math.floor(this.timeLeftInMilliseconds / 1000));
       } else {
         clearInterval(this.intervalId);
+        this.notifications.workNotification();
         this.startBreakTimer();
       }
     }, 1000);
@@ -57,6 +60,7 @@ export class TimeService {
         this.updateTimer(Math.floor(this.timeLeftInMilliseconds / 1000));
       } else {
         clearInterval(this.intervalId);
+        this.notifications.breakNotification();
         this.breakTimerEnded.next();
       }
     }, 1000);
